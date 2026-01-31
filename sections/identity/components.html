@@ -1,0 +1,73 @@
+<section class="section" id="components">
+    <div class="concept-card card">
+        <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
+            UI Components
+        </h3>
+        <p>Reusable UI components ensure consistency across digital products. <strong>Use these patterns as the foundation</strong> for all interface design work.</p>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Button Component</div>
+        <div class="component-preview">
+            <div class="preview-panel">
+                <button class="sample-btn">Primary Button</button>
+            </div>
+            <div class="code-panel">
+                <code><span class="code-keyword">.btn-primary</span> {
+  <span class="code-property">background</span>: <span class="code-string">#E43292</span>;
+  <span class="code-property">color</span>: <span class="code-string">#ffffff</span>;
+  <span class="code-property">padding</span>: 12px 24px;
+  <span class="code-property">border-radius</span>: 10px;
+  <span class="code-property">font-weight</span>: 500;
+  <span class="code-property">border</span>: none;
+  <span class="code-property">cursor</span>: pointer;
+}</code>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Input Field</div>
+        <div class="component-preview">
+            <div class="preview-panel">
+                <input type="text" placeholder="Enter text..." style="padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; width: 200px; font-family: inherit;">
+            </div>
+            <div class="code-panel">
+                <code><span class="code-keyword">.input-field</span> {
+  <span class="code-property">padding</span>: 12px 16px;
+  <span class="code-property">border</span>: 2px solid <span class="code-string">#e0e0e0</span>;
+  <span class="code-property">border-radius</span>: 10px;
+  <span class="code-property">font-size</span>: 14px;
+}
+<span class="code-keyword">.input-field:focus</span> {
+  <span class="code-property">border-color</span>: <span class="code-string">#E43292</span>;
+  <span class="code-property">outline</span>: none;
+}</code>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">12-Column Grid</div>
+        <div class="grid-demo">
+            <div class="grid-columns">
+                <div class="grid-col">1</div>
+                <div class="grid-col">2</div>
+                <div class="grid-col">3</div>
+                <div class="grid-col">4</div>
+                <div class="grid-col">5</div>
+                <div class="grid-col">6</div>
+                <div class="grid-col">7</div>
+                <div class="grid-col">8</div>
+                <div class="grid-col">9</div>
+                <div class="grid-col">10</div>
+                <div class="grid-col">11</div>
+                <div class="grid-col">12</div>
+            </div>
+        </div>
+        <p style="margin-top: 16px; font-size: 14px; color: var(--grey-600);">
+            <strong>Grid specs:</strong> 12 columns, 24px gutter, 1200px max-width container
+        </p>
+    </div>
+</section>

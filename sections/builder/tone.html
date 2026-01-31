@@ -1,0 +1,77 @@
+<section class="section" id="tone">
+    <div class="concept-card card">
+        <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
+            Brand Tone & Voice
+        </h3>
+        <p>Tone of voice is how your personality sounds in words. It's the difference between formal and casual, enthusiastic and calm, technical and simple. <strong>Your tone should flex slightly based on context</strong>—more serious for complaints, more playful for celebrations—while staying recognisably you.</p>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Voice Characteristics</div>
+        
+        <div class="input-field" onclick="openModal('voiceDescription', 'Voice Description', 'Describe how your brand sounds when it speaks. Is it formal or casual? Warm or cool? Technical or accessible? Use specific examples of words you would and wouldn\'t use. How would someone recognise your writing?', 'Our voice is...')">
+            <div class="input-field-header">
+                <div>
+                    <div class="input-field-label">
+                        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                        Voice Description
+                    </div>
+                    <div class="input-field-hint">How your brand sounds</div>
+                </div>
+                <div class="edit-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+            </div>
+            <div class="input-field-content empty" data-field="voiceDescription">Click to describe your voice...</div>
+        </div>
+        
+        <div class="input-grid">
+            <div class="input-field" onclick="openModal('weAre', 'We Are...', 'List the characteristics that define your brand voice. These are the qualities you want to embody in all communications.', 'e.g., Confident but not arrogant, Clear but not simplistic, Friendly but not casual...')">
+                <div class="input-field-header">
+                    <div><div class="input-field-label" style="color: var(--success);">✓ We Are...</div></div>
+                    <div class="edit-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+                </div>
+                <div class="input-field-content empty" data-field="weAre">Click to add...</div>
+            </div>
+            
+            <div class="input-field" onclick="openModal('weAreNot', 'We Are Not...', 'List the characteristics that are NOT your brand voice. These are qualities you actively avoid.', 'e.g., Stuffy, Corporate-speak, Condescending, Aggressive, Boring...')">
+                <div class="input-field-header">
+                    <div><div class="input-field-label" style="color: var(--danger);">✗ We Are Not...</div></div>
+                    <div class="edit-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+                </div>
+                <div class="input-field-content empty" data-field="weAreNot">Click to add...</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Writing Guidelines</div>
+        
+        <div class="input-field" onclick="openModal('writingDos', 'Writing Do\'s', 'List specific writing practices to follow. Include examples where possible. These are the rules everyone should follow when writing for your brand.', 'e.g., Use active voice, Start with benefits, Keep sentences short, Use contractions, Address readers directly...')">
+            <div class="input-field-header">
+                <div>
+                    <div class="input-field-label">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        Do's
+                    </div>
+                    <div class="input-field-hint">Writing practices to follow</div>
+                </div>
+                <div class="edit-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+            </div>
+            <div class="input-field-content empty" data-field="writingDos">Click to add do's...</div>
+        </div>
+        
+        <div class="input-field" onclick="openModal('writingDonts', 'Writing Don\'ts', 'List specific writing practices to avoid. Be specific about what not to do and why.', 'e.g., Don\'t use jargon without explaining it, Avoid passive voice, Never use ALL CAPS, Don\'t be preachy...')">
+            <div class="input-field-header">
+                <div>
+                    <div class="input-field-label">
+                        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                        Don'ts
+                    </div>
+                    <div class="input-field-hint">Writing practices to avoid</div>
+                </div>
+                <div class="edit-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+            </div>
+            <div class="input-field-content empty" data-field="writingDonts">Click to add don'ts...</div>
+        </div>
+    </div>
+</section>
