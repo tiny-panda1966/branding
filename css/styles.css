@@ -1743,16 +1743,14 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 100%;
-    height: auto;
+    height: 100%;
+    min-height: 100vh;
     background: rgba(0,0,0,0.3);
     z-index: 1000;
 }
 
 .color-picker-overlay.active {
     display: block;
-    height: 100%;
-    min-height: 100vh;
 }
 
 .color-picker-modal {
