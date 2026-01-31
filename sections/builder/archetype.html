@@ -1,1 +1,81 @@
+<section class="section" id="archetype">
+    <div class="concept-card card">
+        <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
+            Brand Archetype
+        </h3>
+        <p>Brand archetypes are universal character types that help customers instantly understand your brand. Based on Carl Jung's work, these 12 archetypes represent fundamental human motivations. <strong>Selecting an archetype guides everything from visual design to tone of voice.</strong></p>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Select Your Archetype</div>
+        <p style="color: var(--grey-600); margin-bottom: 16px;">Choose the archetype that best represents your brand's personality and motivation.</p>
+        
+        <div class="archetype-grid">
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Innocent')">
+                <div class="archetype-emoji">😇</div>
+                <div class="archetype-name">Innocent</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Sage')">
+                <div class="archetype-emoji">🦉</div>
+                <div class="archetype-name">Sage</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Explorer')">
+                <div class="archetype-emoji">🧭</div>
+                <div class="archetype-name">Explorer</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Outlaw')">
+                <div class="archetype-emoji">🏴‍☠️</div>
+                <div class="archetype-name">Outlaw</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Magician')">
+                <div class="archetype-emoji">🪄</div>
+                <div class="archetype-name">Magician</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Hero')">
+                <div class="archetype-emoji">🦸</div>
+                <div class="archetype-name">Hero</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Lover')">
+                <div class="archetype-emoji">❤️</div>
+                <div class="archetype-name">Lover</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Jester')">
+                <div class="archetype-emoji">🃏</div>
+                <div class="archetype-name">Jester</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Everyman')">
+                <div class="archetype-emoji">👋</div>
+                <div class="archetype-name">Everyman</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Caregiver')">
+                <div class="archetype-emoji">🤗</div>
+                <div class="archetype-name">Caregiver</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Ruler')">
+                <div class="archetype-emoji">👑</div>
+                <div class="archetype-name">Ruler</div>
+            </div>
+            <div class="archetype-card" onclick="selectArchetype(this, 'The Creator')">
+                <div class="archetype-emoji">🎨</div>
+                <div class="archetype-name">Creator</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Archetype Details</div>
+        
+        <div class="input-field" onclick="openModal('archetypeReason', 'Why This Archetype?', 'Explain why this archetype fits your brand. How does it align with your values, audience, and goals? What characteristics of this archetype do you embody?', 'Explain your archetype choice...')">
+            <div class="input-field-header">
+                <div>
+                    <div class="input-field-label">Why This Archetype?</div>
+                    <div class="input-field-hint">Explain your choice</div>
+                </div>
+                <div class="edit-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+            </div>
+            <div class="input-field-content empty" data-field="archetypeReason">Click to explain...</div>
+        </div>
+    </div>
+</section>
 
