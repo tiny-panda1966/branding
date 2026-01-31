@@ -1739,17 +1739,20 @@ body {
 
 .color-picker-overlay {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
     background: rgba(0,0,0,0.3);
     z-index: 1000;
 }
 
 .color-picker-overlay.active {
     display: block;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .color-picker-modal {
@@ -1981,4 +1984,3 @@ body {
     .sidebar { display: none; }
     .archetype-grid { grid-template-columns: repeat(2, 1fr); }
 }
-
