@@ -4,11 +4,56 @@
             <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
             Colour Palette
         </h3>
-        <p>Colours evoke emotions and create instant associations. Our brand pink conveys <strong>creativity, energy, and confidence</strong>. Consistent colour usage reinforces brand recognition. Click any colour to copy its value.</p>
+        <p>Colours evoke emotions and create instant associations. Our brand pink conveys <strong>creativity, energy, and confidence</strong>. Consistent colour usage reinforces brand recognition.</p>
+    </div>
+    
+    <!-- Visual Colour Palette -->
+    <div class="card palette-visual-card">
+        <div class="palette-visual">
+            <!-- Left labels -->
+            <div class="palette-label label-primary-02">Primary Light</div>
+            <div class="palette-label label-primary-01">Primary Pink</div>
+            <div class="palette-label label-dark-neutral">Dark Neutral</div>
+            <div class="palette-label label-accent">Accent Purple</div>
+            
+            <!-- Right labels -->
+            <div class="palette-label label-light-neutral">White</div>
+            <div class="palette-label label-medium-neutral">Light Grey</div>
+            <div class="palette-label label-secondary-01">Secondary Purple</div>
+            <div class="palette-label label-secondary-02">Medium Grey</div>
+            
+            <!-- Color blobs -->
+            <div class="color-blob blob-primary-01" onclick="copyColor('#E43292')">
+                <span class="blob-tooltip">#E43292 · RGB 228, 50, 146</span>
+            </div>
+            <div class="color-blob blob-primary-02" onclick="copyColor('#F5D0E3')">
+                <span class="blob-tooltip">#F5D0E3 · RGB 245, 208, 227</span>
+            </div>
+            <div class="color-blob blob-dark-neutral" onclick="copyColor('#1A1A1A')">
+                <span class="blob-tooltip">#1A1A1A · RGB 26, 26, 26</span>
+            </div>
+            <div class="color-blob blob-accent" onclick="copyColor('#9C27B0')">
+                <span class="blob-tooltip">#9C27B0 · RGB 156, 39, 176</span>
+            </div>
+            <div class="color-blob blob-secondary-01" onclick="copyColor('#7B1FA2')">
+                <span class="blob-tooltip">#7B1FA2 · RGB 123, 31, 162</span>
+            </div>
+            <div class="color-blob blob-secondary-02" onclick="copyColor('#757575')">
+                <span class="blob-tooltip">#757575 · RGB 117, 117, 117</span>
+            </div>
+            <div class="color-blob blob-light-neutral" onclick="copyColor('#FFFFFF')">
+                <span class="blob-tooltip">#FFFFFF · RGB 255, 255, 255</span>
+            </div>
+            <div class="color-blob blob-medium-neutral" onclick="copyColor('#EEEEEE')">
+                <span class="blob-tooltip">#EEEEEE · RGB 238, 238, 238</span>
+            </div>
+        </div>
+        <p class="palette-description">A colour palette in branding is a curated set of colours representing your brand's identity and helps create a recognisable, cohesive look across all materials. It typically includes primary colours, which form the core of the brand's look and are used most frequently; secondary colours, which complement the primary colours and add flexibility; and accent colours, used sparingly to emphasise key elements like buttons or calls to action.</p>
     </div>
     
     <div class="card">
-        <div class="card-title">Primary Palette</div>
+        <div class="card-title">Colour Swatches</div>
+        <p style="color: var(--grey-600); margin-bottom: 16px;">Click any colour to copy its value.</p>
         <div class="color-grid">
             <div class="color-card" onclick="copyColor('#E43292')">
                 <div class="color-swatch" style="background: #E43292;"></div>
