@@ -33,7 +33,7 @@ const CONFIG = {
             sections: [
                 { id: 'logo', label: 'Logo', icon: 'logo' },
                 { id: 'logo-misuse', label: 'Logo Misuse', icon: 'alert-circle' },
-                { id: 'colors', label: 'Colours', icon: 'droplet' },
+                { id: 'colors', label: 'Colour Palette', icon: 'droplet' },
                 { id: 'typography', label: 'Typography', icon: 'type' },
                 { id: 'photography', label: 'Photography', icon: 'image' },
                 { id: 'illustration', label: 'Illustration', icon: 'pen-tool' },
@@ -79,7 +79,7 @@ const CONFIG = {
         // Brand Identity
         logo: { title: 'Logo', subtitle: 'Logo variants and usage guidelines' },
         'logo-misuse': { title: 'Logo Misuse', subtitle: 'What NOT to do with the logo' },
-        colors: { title: 'Colours', subtitle: 'Brand palette with accessibility' },
+        colors: { title: 'Colour Palette', subtitle: 'Brand colours with accessibility guidelines' },
         typography: { title: 'Typography', subtitle: 'Brand fonts and type hierarchy' },
         photography: { title: 'Photography', subtitle: 'Visual style guidelines' },
         illustration: { title: 'Illustration', subtitle: 'Illustration style and usage' },

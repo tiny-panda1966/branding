@@ -20,7 +20,11 @@ function buildNavigation() {
     // Brand Builder section
     const builder = CONFIG.navigation.builder;
     html += `<div class="nav-section">`;
-    html += `<div class="nav-section-title ${builder.titleClass}">${builder.title}</div>`;
+    html += `<div class="nav-section-title ${builder.titleClass}" onclick="toggleNavSection(this)" data-section-group="builder">
+        <span>${builder.title}</span>
+        <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" fill="currentColor"/></svg>
+    </div>`;
+    html += `<div class="nav-items-wrapper expanded" data-group="builder">`;
     
     builder.sections.forEach((section, index) => {
         const activeClass = index === 0 ? 'active' : '';
@@ -35,12 +39,16 @@ function buildNavigation() {
             </div>
         `;
     });
-    html += `</div>`;
+    html += `</div></div>`;
     
     // Brand Identity section
     const identity = CONFIG.navigation.identity;
     html += `<div class="nav-section">`;
-    html += `<div class="nav-section-title ${identity.titleClass}">${identity.title}</div>`;
+    html += `<div class="nav-section-title ${identity.titleClass}" onclick="toggleNavSection(this)" data-section-group="identity">
+        <span>${identity.title}</span>
+        <svg class="nav-chevron" viewBox="0 0 24 24" width="16" height="16"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" fill="currentColor"/></svg>
+    </div>`;
+    html += `<div class="nav-items-wrapper expanded" data-group="identity">`;
     
     identity.sections.forEach(section => {
         html += `
@@ -50,9 +58,26 @@ function buildNavigation() {
             </div>
         `;
     });
-    html += `</div>`;
+    html += `</div></div>`;
     
     nav.innerHTML = html;
+}
+
+// Toggle navigation section collapse/expand
+function toggleNavSection(titleElement) {
+    const group = titleElement.dataset.sectionGroup;
+    const wrapper = document.querySelector(`.nav-items-wrapper[data-group="${group}"]`);
+    const isExpanded = wrapper.classList.contains('expanded');
+    
+    if (isExpanded) {
+        wrapper.classList.remove('expanded');
+        wrapper.classList.add('collapsed');
+        titleElement.classList.add('collapsed');
+    } else {
+        wrapper.classList.remove('collapsed');
+        wrapper.classList.add('expanded');
+        titleElement.classList.remove('collapsed');
+    }
 }
 
 // Navigate to section
@@ -76,6 +101,12 @@ function navigateTo(sectionId) {
     
     // Load section content
     loadSection(sectionId);
+    
+    // Scroll content pane to top
+    const contentBody = document.getElementById('contentBody');
+    if (contentBody) {
+        contentBody.scrollTop = 0;
+    }
 }
 
 // Load section content
@@ -96,6 +127,19 @@ function loadSection(sectionId) {
         })
         .then(html => {
             contentBody.innerHTML = html;
+            
+            // Execute any scripts in the loaded content
+            const scripts = contentBody.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                if (oldScript.src) {
+                    newScript.src = oldScript.src;
+                } else {
+                    newScript.textContent = oldScript.textContent;
+                }
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+            
             animateCards(sectionId);
             initSectionFeatures(sectionId);
         })
@@ -160,6 +204,13 @@ function initSectionFeatures(sectionId) {
                         card.classList.add('selected');
                     }
                 });
+            }
+            break;
+            
+        case 'colors':
+            // Initialize color palette drag-drop and picker
+            if (typeof initColorsSection === 'function') {
+                initColorsSection();
             }
             break;
     }
