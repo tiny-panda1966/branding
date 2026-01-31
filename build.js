@@ -55,10 +55,8 @@ const sectionsData = JSON.stringify({
     identity: identitySections
 });
 
-// Modified app.js that uses embedded sections instead of fetch
-const modifiedAppJs = appJs.replace(
-    /\/\/ Load section content[\s\S]*?function loadSection\(sectionId\) \{[\s\S]*?\.catch\(error => \{[\s\S]*?\}\);[\s\S]*?\}/,
-    `// Load section content (bundled version - no fetch needed)
+// Create bundled version of loadSection (replaces fetch-based version)
+const bundledLoadSection = `// Load section content (bundled version - no fetch needed)
 function loadSection(sectionId) {
     const contentBody = document.getElementById('contentBody');
     
@@ -67,21 +65,21 @@ function loadSection(sectionId) {
     const folder = isBuilder ? 'builder' : 'identity';
     
     // Get section from embedded data
-    const html = SECTIONS_DATA[folder][sectionId];
+    const sectionHtml = SECTIONS_DATA[folder][sectionId];
     
-    if (html) {
-        contentBody.innerHTML = html;
+    if (sectionHtml) {
+        contentBody.innerHTML = sectionHtml;
         animateCards(sectionId);
         initSectionFeatures(sectionId);
     } else {
-        contentBody.innerHTML = \`
-            <div class="concept-card card">
-                <h3>\${getIcon('alert-circle')} Section Coming Soon</h3>
-                <p>This section is currently being built. Check back soon!</p>
-            </div>
-        \`;
+        contentBody.innerHTML = '<div class="concept-card card"><h3>Section Coming Soon</h3><p>This section is currently being built. Check back soon!</p></div>';
     }
-}`
+}`;
+
+// Replace the fetch-based loadSection with bundled version
+const modifiedAppJs = appJs.replace(
+    /\/\/ Load section content\nfunction loadSection[\s\S]*?^\}/m,
+    bundledLoadSection
 );
 
 // Build the complete HTML
