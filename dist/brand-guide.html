@@ -1747,17 +1747,20 @@ body {
 
 .color-picker-overlay {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
     background: rgba(0,0,0,0.3);
     z-index: 1000;
 }
 
 .color-picker-overlay.active {
     display: block;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .color-picker-modal {
@@ -2963,12 +2966,24 @@ function openColorPicker(blob) {
     const originalPreview = document.getElementById('originalColorPreview');
     const newPreview = document.getElementById('newColorPreview');
     const overlay = document.getElementById('colorPickerOverlay');
+    const modal = document.getElementById('colorPickerModal');
     
     if (nativePicker) nativePicker.value = currentColor;
     if (hexInput) hexInput.value = currentColor;
     if (nameInput) nameInput.value = currentName;
     if (originalPreview) originalPreview.style.background = originalColor;
     if (newPreview) newPreview.style.background = currentColor;
+    
+    // Position modal at current scroll position (fixes iframe issues)
+    if (modal) {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        const modalHeight = 400; // approximate modal height
+        const topPosition = scrollY + (viewportHeight / 2) - (modalHeight / 2);
+        modal.style.top = Math.max(scrollY + 50, topPosition) + 'px';
+        modal.style.left = '50%';
+        modal.style.transform = 'translateX(-50%)';
+    }
     
     updateSuggestedName(currentColor);
     if (overlay) overlay.classList.add('active');
