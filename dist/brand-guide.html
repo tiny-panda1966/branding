@@ -2079,7 +2079,11 @@ function navigateTo(sectionId) {
         document.getElementById('sectionSubtitle').textContent = info.subtitle;
     }
     
-    // Load section content (bundled version - no fetch needed)
+    // Load section content
+    loadSection(sectionId);
+}
+
+// Load section content (bundled version - no fetch needed)
 function loadSection(sectionId) {
     const contentBody = document.getElementById('contentBody');
     
@@ -2088,19 +2092,14 @@ function loadSection(sectionId) {
     const folder = isBuilder ? 'builder' : 'identity';
     
     // Get section from embedded data
-    const html = SECTIONS_DATA[folder][sectionId];
+    const sectionHtml = SECTIONS_DATA[folder][sectionId];
     
-    if (html) {
-        contentBody.innerHTML = html;
+    if (sectionHtml) {
+        contentBody.innerHTML = sectionHtml;
         animateCards(sectionId);
         initSectionFeatures(sectionId);
     } else {
-        contentBody.innerHTML = `
-            <div class="concept-card card">
-                <h3>${getIcon('alert-circle')} Section Coming Soon</h3>
-                <p>This section is currently being built. Check back soon!</p>
-            </div>
-        `;
+        contentBody.innerHTML = '<div class="concept-card card"><h3>Section Coming Soon</h3><p>This section is currently being built. Check back soon!</p></div>';
     }
 }
 
