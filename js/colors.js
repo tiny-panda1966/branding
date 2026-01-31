@@ -424,19 +424,38 @@ function openColorPicker(blob) {
     if (originalPreview) originalPreview.style.background = originalColor;
     if (newPreview) newPreview.style.background = currentColor;
     
-    // Position modal at current scroll position (fixes iframe issues)
-    if (modal) {
+    // Position modal near the clicked blob (works in iframes)
+    if (modal && blob) {
+        const blobRect = blob.getBoundingClientRect();
         const scrollY = window.scrollY || window.pageYOffset;
-        const viewportHeight = window.innerHeight;
-        const modalHeight = 400; // approximate modal height
-        const topPosition = scrollY + (viewportHeight / 2) - (modalHeight / 2);
-        modal.style.top = Math.max(scrollY + 50, topPosition) + 'px';
-        modal.style.left = '50%';
-        modal.style.transform = 'translateX(-50%)';
+        const scrollX = window.scrollX || window.pageXOffset;
+        
+        // Position modal to the right of the blob, or centered if not enough space
+        let topPos = blobRect.top + scrollY - 50;
+        let leftPos = blobRect.right + scrollX + 20;
+        
+        // If modal would go off right edge, center it instead
+        if (leftPos + 340 > window.innerWidth + scrollX) {
+            leftPos = Math.max(20, (window.innerWidth - 340) / 2 + scrollX);
+        }
+        
+        // Keep within reasonable bounds
+        topPos = Math.max(scrollY + 20, topPos);
+        
+        modal.style.top = topPos + 'px';
+        modal.style.left = leftPos + 'px';
+        modal.style.transform = 'none';
     }
     
     updateSuggestedName(currentColor);
     if (overlay) overlay.classList.add('active');
+    
+    // Scroll modal into view (for iframe compatibility)
+    if (modal) {
+        setTimeout(() => {
+            modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
+    }
 }
 
 function updateSuggestedName(hex) {
