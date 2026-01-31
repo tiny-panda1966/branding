@@ -86,14 +86,12 @@ function hexToRgb(hex) {
 // DRAG AND DROP STATE
 // ============================================
 let draggedBlob = null;
-let dragOffsetX = 0;
-let dragOffsetY = 0;
-let isDraggingBlob = false;
-let hasMoved = false;
 let dragStartX = 0;
 let dragStartY = 0;
-let originalParent = null;
-let originalNextSibling = null;
+let blobStartX = 0;
+let blobStartY = 0;
+let isDraggingBlob = false;
+let hasMoved = false;
 
 // ============================================
 // COLOR PICKER STATE
@@ -128,7 +126,6 @@ function initColorsSection() {
             hexInput.value = currentColor;
             document.getElementById('newColorPreview').style.background = currentColor;
             updateSuggestedName(currentColor);
-            updateLivePreview(currentColor);
         });
     }
     
@@ -141,7 +138,6 @@ function initColorsSection() {
                 nativePicker.value = currentColor;
                 document.getElementById('newColorPreview').style.background = currentColor;
                 updateSuggestedName(currentColor);
-                updateLivePreview(currentColor);
             }
         });
     }
@@ -149,13 +145,6 @@ function initColorsSection() {
     if (nameInput) {
         nameInput.addEventListener('input', function(e) {
             currentName = e.target.value;
-            // Update live preview with new name
-            if (activeBlob && currentColor) {
-                const colorId = activeBlob.dataset.colorId;
-                updateBlobTooltip(activeBlob, currentName, currentColor);
-                updateLabel(colorId, currentName);
-                updateSwatch(colorId, currentColor, currentName);
-            }
         });
     }
     
@@ -202,39 +191,13 @@ function initColorsSection() {
 // DRAG AND DROP FUNCTIONS
 // ============================================
 function startDrag(e) {
-    e.preventDefault(); // Prevent text selection
     draggedBlob = e.currentTarget;
-    
-    // Store initial mouse position for detecting movement
     dragStartX = e.clientX;
     dragStartY = e.clientY;
     
-    // Get current visual position (includes animation transform)
     const rect = draggedBlob.getBoundingClientRect();
-    
-    // Calculate offset from mouse position to blob's top-left corner
-    dragOffsetX = e.clientX - rect.left;
-    dragOffsetY = e.clientY - rect.top;
-    
-    // Store original position in DOM so we can return it
-    originalParent = draggedBlob.parentNode;
-    originalNextSibling = draggedBlob.nextSibling;
-    
-    // Move blob to body to escape any transformed parent containers
-    // This fixes position:fixed not working when parent has CSS transform
-    document.body.appendChild(draggedBlob);
-    
-    // Position blob at its current visual location
-    draggedBlob.style.animation = 'none';
-    draggedBlob.style.position = 'fixed';
-    draggedBlob.style.left = rect.left + 'px';
-    draggedBlob.style.top = rect.top + 'px';
-    draggedBlob.style.marginLeft = '0';
-    draggedBlob.style.marginTop = '0';
-    draggedBlob.style.margin = '0';
-    draggedBlob.style.transform = 'none';
-    draggedBlob.style.width = rect.width + 'px';
-    draggedBlob.style.height = rect.height + 'px';
+    blobStartX = rect.left;
+    blobStartY = rect.top;
     
     isDraggingBlob = true;
     hasMoved = false;
@@ -247,35 +210,34 @@ document.addEventListener('mousemove', function(e) {
     const dx = e.clientX - dragStartX;
     const dy = e.clientY - dragStartY;
     
-    // Only mark as moved after threshold (for click vs drag detection)
-    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
         hasMoved = true;
         draggedBlob.classList.add('dragging');
-    }
-    
-    // Update position to follow cursor (position already set to fixed on mousedown)
-    draggedBlob.style.left = (e.clientX - dragOffsetX) + 'px';
-    draggedBlob.style.top = (e.clientY - dragOffsetY) + 'px';
-    
-    // Highlight potential drop targets
-    const blobs = document.querySelectorAll('#colors .color-blob');
-    blobs.forEach(blob => {
-        if (blob !== draggedBlob) {
-            blob.classList.remove('drop-target');
-            
-            const rect = blob.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const distance = Math.sqrt(
-                Math.pow(e.clientX - centerX, 2) + 
-                Math.pow(e.clientY - centerY, 2)
-            );
-            
-            if (distance < rect.width / 2 + 30) {
-                blob.classList.add('drop-target');
+        
+        draggedBlob.style.position = 'fixed';
+        draggedBlob.style.left = (blobStartX + dx) + 'px';
+        draggedBlob.style.top = (blobStartY + dy) + 'px';
+        draggedBlob.style.margin = '0';
+        
+        const blobs = document.querySelectorAll('#colors .color-blob');
+        blobs.forEach(blob => {
+            if (blob !== draggedBlob) {
+                blob.classList.remove('drop-target');
+                
+                const rect = blob.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const distance = Math.sqrt(
+                    Math.pow(e.clientX - centerX, 2) + 
+                    Math.pow(e.clientY - centerY, 2)
+                );
+                
+                if (distance < rect.width / 2 + 30) {
+                    blob.classList.add('drop-target');
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 // Global mouse up handler for blob dragging
@@ -288,27 +250,11 @@ document.addEventListener('mouseup', function(e) {
         swapColors(draggedBlob, dropTarget);
     }
     
-    // Reset all positioning - clear inline styles to restore CSS positioning
     draggedBlob.classList.remove('dragging');
     draggedBlob.style.position = '';
     draggedBlob.style.left = '';
     draggedBlob.style.top = '';
     draggedBlob.style.margin = '';
-    draggedBlob.style.marginLeft = '';
-    draggedBlob.style.marginTop = '';
-    draggedBlob.style.transform = '';
-    draggedBlob.style.animation = '';
-    draggedBlob.style.width = '';
-    draggedBlob.style.height = '';
-    
-    // Return blob to original position in DOM
-    if (originalParent) {
-        if (originalNextSibling) {
-            originalParent.insertBefore(draggedBlob, originalNextSibling);
-        } else {
-            originalParent.appendChild(draggedBlob);
-        }
-    }
     
     const blobs = document.querySelectorAll('#colors .color-blob');
     blobs.forEach(blob => blob.classList.remove('drop-target'));
@@ -320,8 +266,6 @@ document.addEventListener('mouseup', function(e) {
     draggedBlob = null;
     isDraggingBlob = false;
     hasMoved = false;
-    originalParent = null;
-    originalNextSibling = null;
 });
 
 function swapColors(blob1, blob2) {
@@ -437,26 +381,6 @@ function updateSuggestedName(hex) {
     }
 }
 
-function updateLivePreview(color) {
-    if (!activeBlob) return;
-    
-    const colorId = activeBlob.dataset.colorId;
-    const nameInput = document.getElementById('nameInput');
-    const currentNameValue = (nameInput && nameInput.value) || activeBlob.dataset.colorName;
-    
-    // Update the blob background in real-time
-    activeBlob.style.background = color;
-    
-    // Update blob tooltip
-    updateBlobTooltip(activeBlob, currentNameValue, color);
-    
-    // Update palette label (keep the name, just refresh)
-    updateLabel(colorId, currentNameValue);
-    
-    // Update swatch card in real-time
-    updateSwatch(colorId, color, currentNameValue);
-}
-
 function useSuggestedName() {
     const nameInput = document.getElementById('nameInput');
     if (nameInput) {
@@ -465,19 +389,7 @@ function useSuggestedName() {
     }
 }
 
-function closeColorPicker(applied = false) {
-    // If closing without applying, revert to stored data-color value
-    if (!applied && activeBlob) {
-        const storedColor = activeBlob.dataset.color;
-        const storedName = activeBlob.dataset.colorName;
-        const colorId = activeBlob.dataset.colorId;
-        
-        activeBlob.style.background = storedColor;
-        updateBlobTooltip(activeBlob, storedName, storedColor);
-        updateLabel(colorId, storedName);
-        updateSwatch(colorId, storedColor, storedName);
-    }
-    
+function closeColorPicker() {
     const overlay = document.getElementById('colorPickerOverlay');
     if (overlay) overlay.classList.remove('active');
     activeBlob = null;
@@ -502,13 +414,6 @@ function undoColor() {
     if (newPreview) newPreview.style.background = originalColor;
     
     updateSuggestedName(originalColor);
-    
-    // Revert live preview to original
-    activeBlob.style.background = originalColor;
-    const colorId = activeBlob.dataset.colorId;
-    updateBlobTooltip(activeBlob, originalName, originalColor);
-    updateLabel(colorId, originalName);
-    updateSwatch(colorId, originalColor, originalName);
 }
 
 function applyColor() {
@@ -518,15 +423,13 @@ function applyColor() {
     const nameInput = document.getElementById('nameInput');
     const newName = (nameInput && nameInput.value) || currentName;
     
-    // Update data attributes to persist the change
+    activeBlob.style.background = currentColor;
     activeBlob.dataset.color = currentColor;
     activeBlob.dataset.colorName = newName;
     
-    // Visual updates already done by live preview, just ensure consistency
-    activeBlob.style.background = currentColor;
     updateBlobTooltip(activeBlob, newName, currentColor);
     updateLabel(colorId, newName);
     updateSwatch(colorId, currentColor, newName);
     
-    closeColorPicker(true); // Pass true to indicate changes were applied
+    closeColorPicker();
 }

@@ -1,0 +1,68 @@
+<section class="section" id="boilerplate">
+    <div class="concept-card card">
+        <h3>
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
+            Boilerplate Text
+        </h3>
+        <p>Boilerplate text provides <strong>consistent company descriptions</strong> for press releases, speaker bios, and marketing materials. Choose the length appropriate for your context.</p>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Company Description</div>
+        
+        <div class="boilerplate-tabs">
+            <button class="boilerplate-tab active" onclick="switchBoilerplate(this, 'short')">Short (25 words)</button>
+            <button class="boilerplate-tab" onclick="switchBoilerplate(this, 'medium')">Medium (50 words)</button>
+            <button class="boilerplate-tab" onclick="switchBoilerplate(this, 'long')">Long (100 words)</button>
+        </div>
+        
+        <div class="boilerplate-content">
+            <button class="copy-btn" onclick="copyBoilerplate()">
+                <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                Copy
+            </button>
+            
+            <div class="boilerplate-text active" data-length="short">
+[Brand Name] is a leading [industry] company helping [target audience] achieve [outcome] through innovative [solution type]. Founded in [year], we serve customers worldwide.
+            </div>
+            
+            <div class="boilerplate-text" data-length="medium">
+[Brand Name] is a leading [industry] company on a mission to [mission statement]. We help [target audience] achieve [outcome] through our innovative [solution type]. Founded in [year] by [founder], we've grown to serve [number] customers across [regions]. Our platform combines [key feature 1] with [key feature 2] to deliver [key benefit]. Headquartered in [location], [Brand Name] is backed by [investors/achievements].
+            </div>
+            
+            <div class="boilerplate-text" data-length="long">
+[Brand Name] is a leading [industry] company transforming how [target audience] approach [problem area]. Founded in [year] by [founder name], who experienced [founding story], the company has grown from a simple idea into a comprehensive platform serving [number] customers across [number] countries.
+
+At our core, we believe [core belief]. This drives everything we do, from our [key feature 1] to our [key feature 2]. Our customers consistently report [key benefit/metric], making us the trusted choice for [use case].
+
+Headquartered in [location] with teams in [other locations], [Brand Name] has been recognised by [awards/press]. We're backed by [investors] and committed to [vision statement]. To learn more, visit [website].
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-title">Quick Facts</div>
+        <div class="social-specs">
+            <div class="social-spec-row">
+                <span><strong>Founded</strong></span>
+                <span>[Year]</span>
+            </div>
+            <div class="social-spec-row">
+                <span><strong>Headquarters</strong></span>
+                <span>[City, Country]</span>
+            </div>
+            <div class="social-spec-row">
+                <span><strong>Employees</strong></span>
+                <span>[Number]</span>
+            </div>
+            <div class="social-spec-row">
+                <span><strong>Customers</strong></span>
+                <span>[Number] in [Number] countries</span>
+            </div>
+            <div class="social-spec-row">
+                <span><strong>Website</strong></span>
+                <span>[URL]</span>
+            </div>
+        </div>
+    </div>
+</section>
